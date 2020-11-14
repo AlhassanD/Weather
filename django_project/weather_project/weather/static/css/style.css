@@ -1,0 +1,17 @@
+body {
+    background-color: grey;
+}
+.research {
+    text-align: center;
+}
+.research h1 {
+    color: cornsilk;
+}
+div{
+    display: block;
+}
+.card {
+    text-align: center;
+    color: cornsilk;
+    border: solid 1px;
+}

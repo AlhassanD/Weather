@@ -1,0 +1,26 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>WeatherApp</title>
+        <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">    </head> -->
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">   
+    </head>
+    <body>
+        <div class="research">
+            <h1>Weather in your city</h1>
+            <form action="" method="GET">
+            <input type="text" id="city" name="city" placeholder="Enter city">
+            <input type="submit" value="Search">
+            </form>
+        </div>
+        <br>
+        <div class="card">
+            <img src="http://openweathermap.org/img/wn/{{city_weather.icon}}.png" alt="image">
+            <p>{{city_weather.city}}</p>
+            <p>{{city_weather.temperature}}</p>
+            <p>{{city_weather.description}}</p>
+        </div>
+    </body>
+</html>
