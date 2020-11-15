@@ -10,17 +10,31 @@
     <body>
         <div class="research">
             <h1>Weather in your city</h1>
-            <form action="" method="GET">
-            <input type="text" id="city" name="city" placeholder="Enter city">
+            <form action="" method="POST">
+                {% csrf_token %}
+                {{form.name}}
             <input type="submit" value="Search">
+            {% if message%}
+            <div class="notification {{message_class}}">{{message}}</div>
+            {% endif%}
             </form>
         </div>
-        <br>
+
+        {% for city_weather in weather_data %}
         <div class="card">
             <img src="http://openweathermap.org/img/wn/{{city_weather.icon}}.png" alt="image">
-            <p>{{city_weather.city}}</p>
-            <p>{{city_weather.temperature}}</p>
-            <p>{{city_weather.description}}</p>
+            <p>
+                <span>{{city_weather.city}}</span>
+                <span>{{city_weather.temperature}}</span><br>
+                <span>{{city_weather.description}}</span>
+            </p>
+            
+            <a href="{% url 'delete' city_weather.city %}">
+                <button class='delete'>supprimer</button>
+            </a>
         </div>
+        
+        {% endfor %}
+        
     </body>
 </html>
