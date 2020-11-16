@@ -3,10 +3,10 @@ import requests
 from .models import City
 from .forms import CityForm
 
-
+url = 'http://api.openweathermap.org/data/2.5/weather?q={}&appid=1f42d4a797916977b0589d6043217a03'
 def index(request):
     # Request API
-    url = 'http://api.openweathermap.org/data/2.5/weather?q={}&appid=1f42d4a797916977b0589d6043217a03'
+    # url = 'http://api.openweathermap.org/data/2.5/weather?q={}&appid=1f42d4a797916977b0589d6043217a03'
     
     err_msg = ''
     message = ''
@@ -21,14 +21,16 @@ def index(request):
             new_city = form.cleaned_data['name']
             # Query count new city in database.
             existing_city_count = City.objects.filter(name=new_city).count()
+            
             # Actually existing_city_count is 0.
             if existing_city_count == 0:
                 # r go 'get request' url for new_city via input and take all data in the city
                 r = requests.get(url.format(new_city)).json()
                 print(r)
+
                 if r['cod'] == 200:
                     form.save()
-                    
+
                 else:
                     err_msg = "City doesnt exist"
                     message_class = 'alert-danger'
